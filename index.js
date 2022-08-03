@@ -30,7 +30,14 @@ const createReactElement =
 function createElement(name, type) {
   class CreateElement extends React.Component {
     render() {
-      return createReactElement(type, this.props, this.props.children);
+      let props = {
+        ...this.props
+      };
+      props.style = {
+        ...props.style,
+        ...((props.x && props.y) ? {transform: "translate("+props.x+"px,"+props.y+"px)"} : {})
+      }
+      return createReactElement(type, props, props.children);
     }
   }
 
